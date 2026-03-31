@@ -39,12 +39,12 @@ def _manage_json(file_path: Path, *, save: bool = False):
         def wrapper(*args, **kwargs):
             payload = _load_json(file_path)
 
-            updated = func(payload, *args, **kwargs)
+            revised = func(payload, *args, **kwargs)
 
             if save:
-                _save_json(updated, file_path)
+                _save_json(revised, file_path)
 
-            return updated
+            return revised
 
         return wrapper
 
