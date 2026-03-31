@@ -1,8 +1,14 @@
 import json
 import logging
+from datetime import UTC, datetime
+from enum import StrEnum
 from functools import wraps
 from pathlib import Path
 from typing import Any
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+STORAGE_PATH = BASE_DIR / "data" / "storage.json"
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +27,7 @@ def _load_json(file_path: Path) -> Any:
 
 
 def _save_json(payload: Any, file_path: Path) -> None:
-    file_path.mkdir(parents=True, exist_ok=True)
+    file_path.parent.mkdir(parents=True, exist_ok=True)
 
     serialized = json.dumps(payload, ensure_ascii=False, indent=2)
     file_path.write_text(serialized, encoding="utf-8")
@@ -43,3 +49,25 @@ def _manage_json(file_path: Path, *, save: bool = False):
         return wrapper
 
     return decorator
+
+
+class TaskStatus(StrEnum):
+    TODO = "todo"
+    IN_PROGRESS = "in-progress"
+    DONE = "done"
+
+
+@_manage_json(STORAGE_PATH, save=True)
+def add_task(tasks: dict, description: str) -> dict:
+    last_id = max((int(task_id) for task_id in tasks), default=0)
+    new_id = str(last_id + 1)
+
+    now_iso = datetime.now(UTC).isoformat()
+
+    tasks[new_id] = {
+        "description": description,
+        "status": TaskStatus.TODO,
+        "created_at": now_iso,
+        "updated_at": now_iso,
+    }
+    return tasks
