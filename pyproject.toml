@@ -1,0 +1,57 @@
+[project]
+name = "task-tracker"
+version = "0.1.0"
+description = "A simple command-line interface for managing your daily tasks"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.8",
+]
+
+[tool.ruff]
+fix = true
+preview = true
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "A",     # flake8-builtins
+    "B",     # flake8-bugbear
+    "C4",    # flake8-comprehensions
+    "C90",   # maccabe
+    "COM",   # flake8-commas
+    "DTZ",   # flake8-datetimez
+    "E",     # pycodestyle
+    "F",     # pyflakes
+    "FA",    # flake8-future-annotations
+    "FBT",   # flake8-boolean-trap
+    "FLY",   # pyflint
+    "FURB",  # refurb
+    "I",     # isort
+    "ICN",   # flake8-import-conventions
+    "ISC",   # flake8-implicit-str-concat
+    "N",     # pep8-naming
+    "PERF",  # perflint
+    "PIE",   # flake8-pie
+    "PL",    # pylint
+    "PTH",   # flake8-use-pathlib
+    "RET",   # flake8-return
+    "RSE",   # flake8-raise
+    "RUF",   # ruff
+    "SIM",   # flake8-simplify
+    "SLF",   # flake8-self
+    "TRY",   # tryceratops
+    "UP",    # pyupgrade
+    "W",     # pycodestyle
+]
+ignore = [
+    "ISC001",  # Checks for implicitly concatenated strings on a single line.
+    "ISC003",  # Checks for string literals that are explicitly concatenated (using the + operator).
+    "TRY003",  # Checks for long exception messages that are not defined in the exception class itself.
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 6
