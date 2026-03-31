@@ -109,3 +109,13 @@ def update_task(
     tasks[str_id].update(update_data)
 
     return tasks
+
+
+@_manage_json(STORAGE_PATH, save=True)
+def delete_task(tasks: dict, task_id: int) -> dict:
+    str_id = str(task_id)
+    if str_id not in tasks:
+        raise KeyError(f"Task with id {task_id} not found")
+
+    tasks.pop(str_id)
+    return tasks
