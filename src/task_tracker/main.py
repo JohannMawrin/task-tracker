@@ -71,3 +71,8 @@ def add_task(tasks: dict, description: str) -> dict:
         "updated_at": now_iso,
     }
     return tasks
+
+
+@_manage_json(STORAGE_PATH)
+def read_tasks(tasks: dict) -> dict:
+    return tasks
