@@ -76,3 +76,12 @@ def add_task(tasks: dict, description: str) -> dict:
 @_manage_json(STORAGE_PATH)
 def read_tasks(tasks: dict) -> dict:
     return tasks
+
+
+@_manage_json(STORAGE_PATH)
+def filter_tasks_by_status(tasks: dict, status: TaskStatus) -> dict:
+    return {
+        task_id: task
+        for task_id, task in tasks.items()
+        if task["status"] == status
+    }
