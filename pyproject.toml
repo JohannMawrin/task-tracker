@@ -51,7 +51,7 @@ select = [
     "W",     # pycodestyle
 ]
 ignore = [
-    "COM812",  #
+    "COM812",  # Checks for the absence of trailing commas.
     "ISC001",  # Checks for implicitly concatenated strings on a single line.
     "ISC003",  # Checks for string literals that are explicitly concatenated (using the + operator).
     "TRY003",  # Checks for long exception messages that are not defined in the exception class itself.
