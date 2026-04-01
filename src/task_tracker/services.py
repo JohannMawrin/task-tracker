@@ -47,6 +47,7 @@ def filter_tasks_by_status(tasks: dict, status: TaskStatus) -> dict:
 def update_task(
     tasks: dict,
     task_id: int,
+    *,
     description: str | None = None,
     status: TaskStatus | None = None,
 ) -> dict:
